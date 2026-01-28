@@ -2,20 +2,21 @@ package com.example.studentportalspring.controller;
 
 import com.example.studentportalspring.model.Course;
 import com.example.studentportalspring.repository.CourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CourseController {
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
     @GetMapping("/courses")
     public String courses(ModelMap modelMap) {
@@ -30,19 +31,15 @@ public class CourseController {
         return "redirect:/courses";
     }
 
-    @GetMapping("/addCourse")
+    @GetMapping("/courses/add")
     public String addCourse() {
         return "addCourse";
     }
 
-    @PostMapping("/addCourse")
-    public String addCourse(@RequestParam("name") String name, @RequestParam("price") double price) {
-        Course course = new Course();
-        course.setName(name);
-        course.setPrice(price);
+    @PostMapping("/courses/add")
+    public String addCourse(@ModelAttribute Course course) {
         courseRepository.save(course);
         return "redirect:/courses";
 
     }
-
 }
