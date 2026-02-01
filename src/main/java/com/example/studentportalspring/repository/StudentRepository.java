@@ -11,7 +11,7 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query("select s from Student s join s.skills sk where sk = :skill")
-    List<Student> findBySkills(Skill skill);
+    List<Student> findBySkill(Skill skill);
 
     List<Student> findByCourse(Course course);
 }

@@ -10,6 +10,7 @@ Students list
 <a href="/students/add">Add Student</a>
 <table border="1">
     <tr>
+        <th>Picture</th>
         <th>Id</th>
         <th>Name</th>
         <th>Surname</th>
@@ -19,6 +20,11 @@ Students list
     </tr>
 
     <tr th:each="student : ${students}">
+        <td>
+            <img th:if="${student.getPictureName() != null && !student.getPictureName().equals('')}" th:src="@{/image/get(picName=${student.pictureName})}" width="50">
+            <img th:if="${student.getPictureName() == null || student.getPictureName().equals('')}" th:src="@{/images/img.png}" width="50">
+
+        </td>
         <td th:text="${student.id}"></td>
         <td th:text="${student.name}"></td>
         <td th:text="${student.surname}"></td>

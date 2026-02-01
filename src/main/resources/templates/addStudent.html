@@ -7,7 +7,7 @@
 <body>
 Add Student
 
-<form action="/students/add" method="post">
+<form action="/students/add" method="post" enctype="multipart/form-data">
     Name: <input type="text" name="name"><br>
     Surname: <input type="text" name="surname"><br>
     Email: <input type="text" name="email"><br>
@@ -19,6 +19,7 @@ Add Student
     <div th:each="s : ${skills}">
         <span th:text="${s.name}"></span> <input type="checkbox" name="skills" th:value="${s.id}">
     </div> <br>
+    <input type="file" name="pic"> <br>
     <input type="submit" value="Submit">
 </form>
 </body>

@@ -35,6 +35,8 @@ public class Student {
     @ManyToOne
     private Course course;
 
+    private String pictureName;
+
     @ManyToMany
     @JoinTable(name = "student_skill",
             joinColumns = @JoinColumn(name = "student_id"),

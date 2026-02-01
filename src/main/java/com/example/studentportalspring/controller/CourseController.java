@@ -1,7 +1,7 @@
 package com.example.studentportalspring.controller;
 
 import com.example.studentportalspring.model.Course;
-import com.example.studentportalspring.repository.CourseRepository;
+import com.example.studentportalspring.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,18 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CourseController {
 
-    private final CourseRepository courseRepository;
+    private final CourseService courseService;
 
     @GetMapping("/courses")
     public String courses(ModelMap modelMap) {
-        List<Course> courses = courseRepository.findAll();
+        List<Course> courses = courseService.findAll();
         modelMap.addAttribute("courses", courses);
         return "courses";
     }
 
     @GetMapping("/courses/delete")
     public String deleteCourse(@RequestParam("id") int id) {
-        courseRepository.deleteById(id);
+        courseService.deleteById(id);
         return "redirect:/courses";
     }
 
@@ -38,7 +38,7 @@ public class CourseController {
 
     @PostMapping("/courses/add")
     public String addCourse(@ModelAttribute Course course) {
-        courseRepository.save(course);
+        courseService.save(course);
         return "redirect:/courses";
 
     }
