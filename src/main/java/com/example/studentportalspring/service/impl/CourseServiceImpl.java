@@ -4,12 +4,14 @@ import com.example.studentportalspring.model.Course;
 import com.example.studentportalspring.repository.CourseRepository;
 import com.example.studentportalspring.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Primary
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
