@@ -5,13 +5,12 @@
     <title>Main Page</title>
 </head>
 <body>
-<a href="/students">Students</a> <br>
-<a href="/courses">Courses</a> <br><br>
 
-<span th:if="${user} != null"> Welcome <span th:text="${user.getName() + ' ' + user.getSurname()}"></span></span>
+<th:block th:insert="fragments/HeaderFragments::header"></th:block>
+
 <a th:if="${user}  != null" href="/logout">Logout</a> <br><br>
-<a th:if="${user}  == null" href="/login">Login</a> <br><br>
-<a th:if="${user}  == null" href="/registerPage">Register</a> <br><br>
+<a th:if="${user}  == null" href="/login" th:text="#{main.login}">Login</a> <br><br>
+<a th:if="${user}  == null" href="/registerPage" th:text="#{main.register}">Register</a> <br><br>
 
 </body>
 </html>

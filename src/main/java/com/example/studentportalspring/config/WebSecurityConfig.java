@@ -19,22 +19,23 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth
-                        .requestMatchers("/",
-                                "/login",
-                                "/loginPage",
-                                "/registerPage",
-                                "/register",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/",
+                                        "/login",
+                                        "/loginPage",
+                                        "/registerPage",
+                                        "/register",
+                                        "/css/**",
+                                        "/js/**",
+                                        "/images/**").permitAll()
+                                .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                                .anyRequest().authenticated()
                 )
                 .formLogin(form ->
                         form
-                        .loginPage("/loginPage")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll()
+                                .loginPage("/loginPage")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/successLogin", true)
+                                .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

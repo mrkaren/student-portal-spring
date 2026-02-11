@@ -1,6 +1,7 @@
 package com.example.studentportalspring.controller;
 
 import com.example.studentportalspring.model.User;
+import com.example.studentportalspring.model.UserRole;
 import com.example.studentportalspring.service.UserService;
 import com.example.studentportalspring.service.security.SpringUser;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,17 @@ public class MainController {
         }
         return "index";
     }
+
+    @GetMapping("/successLogin")
+    public String successLogin(@AuthenticationPrincipal SpringUser springUser) {
+        if (springUser != null
+                && springUser.getUser().getRole() == UserRole.ADMIN) {
+            return "redirect:/admin/home";
+        } else {
+            return "redirect:/";
+        }
+    }
+
 
     @GetMapping("/loginPage")
     public String loginPage(@RequestParam(required = false) String msg, ModelMap modelMap) {
