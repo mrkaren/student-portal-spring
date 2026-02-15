@@ -6,24 +6,67 @@
 </head>
 <body>
 
-<th:block th:insert="fragments/HeaderFragments::header"></th:block>
+<th:block th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+    <title th:text="#{students.add}">Add Student</title>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i><span th:text="#{students.add}">Add Student</span></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/students/add" method="post" enctype="multipart/form-data">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label" th:text="#{form.name}">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" th:placeholder="#{form.name}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="surname" class="form-label" th:text="#{form.surname}">Surname</label>
+                                    <input type="text" class="form-control" id="surname" name="surname" th:placeholder="#{form.surname}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label" th:text="#{table.email}">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" th:placeholder="#{table.email}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="course" class="form-label" th:text="#{table.course}">Course</label>
+                                <select class="form-select" id="course" name="course.id">
+                                    <option th:each="course : ${courses}"
+                                            th:value="${course.id}"
+                                            th:text="${course.name}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" th:text="#{table.skills}">Skills</label>
+                                <div>
+                                    <div th:each="s : ${skills}" class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="skills" th:value="${s.id}" th:id="'skill-' + ${s.id}">
+                                        <label class="form-check-label" th:for="'skill-' + ${s.id}" th:text="${s.name}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pic" class="form-label" th:text="#{form.picture}">Picture</label>
+                                <input type="file" class="form-control" id="pic" name="pic" accept="image/*">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-check-circle me-1"></i><span th:text="#{form.submit}">Submit</span>
+                                </button>
+                                <a href="/students" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle me-1"></i><span th:text="#{form.cancel}">Cancel</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</th:block>
 
-Add Student
-
-<form action="/students/add" method="post" enctype="multipart/form-data">
-    Name: <input type="text" name="name"><br>
-    Surname: <input type="text" name="surname"><br>
-    Email: <input type="text" name="email"><br>
-    Course: <select name="course.id">
-    <option th:each="course : ${courses}"
-            th:value="${course.id}"
-            th:text="${course.name}"></option>
-</select><br>
-    <div th:each="s : ${skills}">
-        <span th:text="${s.name}"></span> <input type="checkbox" name="skills" th:value="${s.id}">
-    </div> <br>
-    <input type="file" name="pic"> <br>
-    <input type="submit" value="Submit">
-</form>
 </body>
 </html>

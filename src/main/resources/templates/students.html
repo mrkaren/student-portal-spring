@@ -5,47 +5,70 @@
     <title>Students</title>
 </head>
 <body>
-<th:block th:insert="fragments/HeaderFragments::header"></th:block>
 
+<th:block th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+    <title th:text="#{header.students}">Students</title>
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-people-fill me-2"></i><span th:text="#{header.students}">Students</span></h2>
+            <div>
+                <a href="/students" class="btn btn-outline-secondary me-2">
+                    <i class="bi bi-arrow-repeat me-1"></i><span th:text="#{students.showAll}">Show All</span>
+                </a>
+                <a href="/students/add" class="btn btn-success">
+                    <i class="bi bi-plus-circle me-1"></i><span th:text="#{students.add}">Add Student</span>
+                </a>
+            </div>
+        </div>
 
-Students list
-<a href="/students">Show All Students</a>
-<a href="/students/add">Add Student</a>
-<table border="1">
-    <tr>
-        <th>Picture</th>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Course</th>
-        <th>Skills</th>
-    </tr>
+        <div th:if="${students == null || students.isEmpty()}" class="alert alert-info text-center">
+            <i class="bi bi-info-circle me-1"></i><span th:text="#{students.empty}">No students found.</span>
+        </div>
 
-    <tr th:each="student : ${students}">
-        <td>
-            <img th:if="${student.getPictureName() != null && !student.getPictureName().equals('')}" th:src="@{/image/get(picName=${student.pictureName})}" width="50">
-            <img th:if="${student.getPictureName() == null || student.getPictureName().equals('')}" th:src="@{/images/img.png}" width="50">
-
-        </td>
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.name}"></td>
-        <td th:text="${student.surname}"></td>
-        <td th:text="${student.email}"></td>
-        <td>
-            <a th:href="@{/students(courseid=${student.course.id})}"
-               th:text="${student.course.name}"
-            ></a>
-
-        </td>
-        <td>
-            <a th:each="skill : ${student.getSkills()}"
-               th:text="${skill.name + ' '}"
-                  th:href="@{/students(skillId=${skill.id})}"></a>
-        </td>
-    </tr>
-
-</table>
+        <div th:if="${students != null && !students.isEmpty()}" class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th th:text="#{table.picture}">Picture</th>
+                        <th th:text="#{table.id}">Id</th>
+                        <th th:text="#{form.name}">Name</th>
+                        <th th:text="#{form.surname}">Surname</th>
+                        <th th:text="#{table.email}">Email</th>
+                        <th th:text="#{table.course}">Course</th>
+                        <th th:text="#{table.skills}">Skills</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${students}">
+                        <td>
+                            <img th:if="${student.getPictureName() != null && !student.getPictureName().equals('')}"
+                                 th:src="@{/image/get(picName=${student.pictureName})}"
+                                 class="student-thumbnail" alt="Student photo">
+                            <img th:if="${student.getPictureName() == null || student.getPictureName().equals('')}"
+                                 th:src="@{/images/img.png}"
+                                 class="student-thumbnail" alt="Default photo">
+                        </td>
+                        <td th:text="${student.id}"></td>
+                        <td th:text="${student.name}"></td>
+                        <td th:text="${student.surname}"></td>
+                        <td th:text="${student.email}"></td>
+                        <td>
+                            <a th:href="@{/students(courseid=${student.course.id})}"
+                               class="badge bg-info text-decoration-none"
+                               th:text="${student.course.name}"></a>
+                        </td>
+                        <td>
+                            <a th:each="skill : ${student.getSkills()}"
+                               th:href="@{/students(skillId=${skill.id})}"
+                               class="badge bg-secondary text-decoration-none"
+                               th:text="${skill.name}"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</th:block>
 
 </body>
 </html>

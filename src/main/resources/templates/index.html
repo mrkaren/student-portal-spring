@@ -2,15 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
+    <title>Student Portal</title>
 </head>
 <body>
 
-<th:block th:insert="fragments/HeaderFragments::header"></th:block>
+<th:block th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+    <title>Student Portal</title>
+    <section>
+        <div class="hero-section rounded-3 p-5 mb-4 text-center">
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-mortarboard-fill me-2"></i>Student Portal
+            </h1>
 
-<a th:if="${user}  != null" href="/logout">Logout</a> <br><br>
-<a th:if="${user}  == null" href="/login" th:text="#{main.login}">Login</a> <br><br>
-<a th:if="${user}  == null" href="/registerPage" th:text="#{main.register}">Register</a> <br><br>
+            <!-- Authenticated user -->
+            <th:block th:if="${user} != null">
+                <p class="lead mt-3">
+                    <span th:text="#{header.welcome}">Welcome</span>,
+                    <strong th:text="${user.getName() + ' ' + user.getSurname()}"></strong>!
+                </p>
+                <div class="mt-4">
+                    <a href="/students" class="btn btn-primary btn-lg me-2">
+                        <i class="bi bi-people-fill me-1"></i> <span th:text="#{header.students}">Students</span>
+                    </a>
+                    <a href="/courses" class="btn btn-success btn-lg">
+                        <i class="bi bi-book-fill me-1"></i> <span th:text="#{header.courses}">Courses</span>
+                    </a>
+                </div>
+            </th:block>
+
+            <!-- Not authenticated -->
+            <th:block th:if="${user} == null">
+                <p class="lead mt-3" th:text="#{home.subtitle}">Manage your students, courses, and skills in one place.</p>
+                <div class="mt-4">
+                    <a href="/loginPage" class="btn btn-primary btn-lg me-2">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> <span th:text="#{main.login}">Login</span>
+                    </a>
+                    <a href="/registerPage" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-person-plus-fill me-1"></i> <span th:text="#{main.register}">Register</span>
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </section>
+</th:block>
 
 </body>
 </html>

@@ -1,18 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add Course</title>
 </head>
 <body>
-<th:block th:replace="~{fragments/HeaderFragments::header}"></th:block>
 
-
-<form action="/courses/add" method="post">
-  Name: <input type="text" name="name"><br>
-  Price: <input type="number" name="price"><br>
-  <input type="submit" value="Submit">
-</form>
+<th:block th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+    <title th:text="#{courses.add}">Add Course</title>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="bi bi-plus-circle me-2"></i><span th:text="#{courses.add}">Add Course</span></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/courses/add" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label" th:text="#{form.name}">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" th:placeholder="#{form.name}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label" th:text="#{table.price}">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" th:placeholder="#{table.price}">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-check-circle me-1"></i><span th:text="#{form.submit}">Submit</span>
+                                </button>
+                                <a href="/courses" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle me-1"></i><span th:text="#{form.cancel}">Cancel</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</th:block>
 
 </body>
 </html>
