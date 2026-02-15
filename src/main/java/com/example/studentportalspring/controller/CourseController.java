@@ -2,7 +2,12 @@ package com.example.studentportalspring.controller;
 
 import com.example.studentportalspring.model.Course;
 import com.example.studentportalspring.service.CourseService;
+import com.example.studentportalspring.service.security.SpringUser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +19,16 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class CourseController {
 
     private final CourseService courseService;
 
     @GetMapping("/courses")
-    public String courses(ModelMap modelMap) {
+    public String courses(ModelMap modelMap, @AuthenticationPrincipal SpringUser springUser) {
         List<Course> courses = courseService.findAll();
         modelMap.addAttribute("courses", courses);
+
         return "courses";
     }
 

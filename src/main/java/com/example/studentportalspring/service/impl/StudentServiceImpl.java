@@ -6,6 +6,7 @@ import com.example.studentportalspring.model.Student;
 import com.example.studentportalspring.repository.StudentRepository;
 import com.example.studentportalspring.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
@@ -37,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
                 multipartFile.transferTo(file);
                 student.setPictureName(fileName);
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Error while saving image for student {}: {}", student. getEmail(), e.getMessage());
             }
         }
 

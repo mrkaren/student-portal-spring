@@ -5,7 +5,7 @@
     <title>Add Course</title>
 </head>
 <body>
-<th:block th:insert="fragments/HeaderFragments::header"></th:block>
+<th:block th:replace="~{fragments/HeaderFragments::header}"></th:block>
 
 
 <form action="/courses/add" method="post">
@@ -13,5 +13,6 @@
   Price: <input type="number" name="price"><br>
   <input type="submit" value="Submit">
 </form>
+
 </body>
 </html>
