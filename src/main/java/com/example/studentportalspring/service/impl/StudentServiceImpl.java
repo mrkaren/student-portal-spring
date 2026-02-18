@@ -8,6 +8,9 @@ import com.example.studentportalspring.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,8 +29,8 @@ public class StudentServiceImpl implements StudentService {
     private String imageDirectoryPath;
 
     @Override
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    public Page<Student> findAll(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
                 multipartFile.transferTo(file);
                 student.setPictureName(fileName);
             } catch (IOException e) {
-                log.error("Error while saving image for student {}: {}", student. getEmail(), e.getMessage());
+                log.error("Error while saving image for student {}: {}, {}", student. getEmail(), e.getMessage(), e.getStackTrace());
             }
         }
 
@@ -48,11 +51,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findByCourse(Course course) {
+
         return studentRepository.findByCourse(course);
     }
 
     @Override
     public List<Student> findBySkill(Skill skill) {
         return studentRepository.findBySkill(skill);
+    }
+
+    @Override
+    public Page<Student> findAllWithSpecification(Specification<Student> spec) {
+        return studentRepository.findAll(spec, Pageable.unpaged());
     }
 }
