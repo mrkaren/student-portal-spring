@@ -1,8 +1,6 @@
 package com.example.studentportalspring.controller;
 
 import com.example.studentportalspring.dto.StudentSearchCriteria;
-import com.example.studentportalspring.model.Course;
-import com.example.studentportalspring.model.Skill;
 import com.example.studentportalspring.model.Student;
 import com.example.studentportalspring.service.CourseService;
 import com.example.studentportalspring.service.SkillService;
@@ -22,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller

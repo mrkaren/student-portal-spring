@@ -42,8 +42,6 @@ public class StudentSpecification implements Specification<Student> {
             predicates.add(criteriaBuilder.like(email, "%" + searchCriteria.getEmail() + "%"));
         }
 
-
-
         return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
     }
 }
