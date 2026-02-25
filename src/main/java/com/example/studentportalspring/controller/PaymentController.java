@@ -8,6 +8,7 @@ public class PaymentController {
 
     @GetMapping("/pay")
     public String pay() {
+        System.out.println("Pay page");
         return "pay";
     }
 }
