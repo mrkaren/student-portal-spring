@@ -1,0 +1,119 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="6" author="kgasparyan">
+
+        <!-- Courses -->
+        <insert tableName="course">
+            <column name="name" value="Java Programming"/>
+            <column name="price" value="500.0"/>
+        </insert>
+        <insert tableName="course">
+            <column name="name" value="Web Development"/>
+            <column name="price" value="450.0"/>
+        </insert>
+        <insert tableName="course">
+            <column name="name" value="Data Science"/>
+            <column name="price" value="600.0"/>
+        </insert>
+
+        <!-- Skills -->
+        <insert tableName="skill">
+            <column name="name" value="Java"/>
+        </insert>
+        <insert tableName="skill">
+            <column name="name" value="Spring Boot"/>
+        </insert>
+        <insert tableName="skill">
+            <column name="name" value="SQL"/>
+        </insert>
+        <insert tableName="skill">
+            <column name="name" value="HTML/CSS"/>
+        </insert>
+        <insert tableName="skill">
+            <column name="name" value="Python"/>
+        </insert>
+
+        <!-- Users -->
+        <insert tableName="user">
+            <column name="name" value="Admin"/>
+            <column name="surname" value="Adminyan"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin123"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="user">
+            <column name="name" value="User"/>
+            <column name="surname" value="Useryan"/>
+            <column name="username" value="user"/>
+            <column name="password" value="password"/>
+            <column name="role" value="USER"/>
+        </insert>
+
+        <!-- Students -->
+        <insert tableName="student">
+            <column name="name" value="Anna"/>
+            <column name="surname" value="Hovhannisyan"/>
+            <column name="email" value="anna.h@example.com"/>
+            <column name="course_id" value="1"/>
+        </insert>
+        <insert tableName="student">
+            <column name="name" value="David"/>
+            <column name="surname" value="Sargsyan"/>
+            <column name="email" value="david.s@example.com"/>
+            <column name="course_id" value="2"/>
+        </insert>
+        <insert tableName="student">
+            <column name="name" value="Maria"/>
+            <column name="surname" value="Grigoryan"/>
+            <column name="email" value="maria.g@example.com"/>
+            <column name="course_id" value="3"/>
+        </insert>
+        <insert tableName="student">
+            <column name="name" value="Armen"/>
+            <column name="surname" value="Petrosyan"/>
+            <column name="email" value="armen.p@example.com"/>
+            <column name="course_id" value="1"/>
+        </insert>
+
+        <!-- Student-Skill associations -->
+        <insert tableName="student_skill">
+            <column name="student_id" value="1"/>
+            <column name="skill_id" value="1"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="1"/>
+            <column name="skill_id" value="2"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="2"/>
+            <column name="skill_id" value="4"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="2"/>
+            <column name="skill_id" value="3"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="3"/>
+            <column name="skill_id" value="5"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="3"/>
+            <column name="skill_id" value="3"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="4"/>
+            <column name="skill_id" value="1"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="4"/>
+            <column name="skill_id" value="2"/>
+        </insert>
+        <insert tableName="student_skill">
+            <column name="student_id" value="4"/>
+            <column name="skill_id" value="3"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
