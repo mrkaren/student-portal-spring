@@ -10,7 +10,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto" th:if="${user} != null">
+            <ul class="navbar-nav me-auto" th:if="${currentUser} != null">
                 <li class="nav-item">
                     <a class="nav-link" href="/students" th:text="#{header.students}">Students</a>
                 </li>
@@ -30,13 +30,13 @@
                         <li><a class="dropdown-item" href="?lang=hy">Հայերեն</a></li>
                     </ul>
                 </li>
-                <!-- Authenticated user -->
-                <th:block th:if="${user} != null">
+                <!-- Authenticated currentUser -->
+                <th:block th:if="${currentUser} != null">
                     <li class="nav-item">
                         <span class="nav-link text-light">
                             <i class="bi bi-person-circle me-1"></i>
                             <span th:text="#{header.welcome}">Welcome</span>,
-                            <span th:text="${user.getName() + ' ' + user.getSurname()}"></span>
+                            <span th:text="${currentUser.getName() + ' ' + currentUser.getSurname()}"></span>
                         </span>
                     </li>
                     <li class="nav-item">
@@ -44,7 +44,7 @@
                     </li>
                 </th:block>
                 <!-- Not authenticated -->
-                <th:block th:if="${user} == null">
+                <th:block th:if="${currentUser} == null">
                     <li class="nav-item">
                         <a class="nav-link" href="/loginPage" th:text="#{main.login}">Login</a>
                     </li>

@@ -61,11 +61,11 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-        if (userService.findByUsername(user.getUsername()).isPresent()) {
+    public String register(@ModelAttribute User registeredUser) {
+        if (userService.findByUsername(registeredUser.getUsername()).isPresent()) {
             return "redirect:/registerPage?msg=Username already exists!";
         }
-        userService.save(user);
+        userService.save(registeredUser);
         return "redirect:/loginPage?msg=Registration successful, pls login!";
     }
 

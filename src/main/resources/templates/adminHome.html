@@ -16,7 +16,7 @@
             <div class="card-body">
                 <p class="lead">
                     <span th:text="#{header.welcome}">Welcome</span>,
-                    <strong th:if="${user} != null" th:text="${user.getName() + ' ' + user.getSurname()}"></strong>!
+                    <strong th:if="${currentUser} != null" th:text="${currentUser.getName() + ' ' + currentUser.getSurname()}"></strong>!
                 </p>
             </div>
         </div>

@@ -14,11 +14,11 @@
                 <i class="bi bi-mortarboard-fill me-2"></i>Student Portal
             </h1>
 
-            <!-- Authenticated user -->
-            <th:block th:if="${user} != null">
+            <!-- Authenticated currentUser -->
+            <th:block th:if="${currentUser} != null">
                 <p class="lead mt-3">
                     <span th:text="#{header.welcome}">Welcome</span>,
-                    <strong th:text="${user.getName() + ' ' + user.getSurname()}"></strong>!
+                    <strong th:text="${currentUser.getName() + ' ' + currentUser.getSurname()}"></strong>!
                 </p>
                 <div class="mt-4">
                     <a href="/students" class="btn btn-primary btn-lg me-2">
@@ -31,7 +31,7 @@
             </th:block>
 
             <!-- Not authenticated -->
-            <th:block th:if="${user} == null">
+            <th:block th:if="${currentUser} == null">
                 <p class="lead mt-3" th:text="#{home.subtitle}">Manage your students, courses, and skills in one place.</p>
                 <div class="mt-4">
                     <a href="/loginPage" class="btn btn-primary btn-lg me-2">

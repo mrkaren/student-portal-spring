@@ -1,4 +1,7 @@
 spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/master.xml
   application:
     name: student-portal-spring
   datasource:
@@ -7,12 +10,14 @@ spring:
     password: ${DB_PASSWORD:rootroot}
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
+
   servlet:
     multipart:
       max-file-size: 10MB
   profiles:
     active:
-
 
 server:
   port: 8081
